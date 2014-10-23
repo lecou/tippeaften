@@ -1,5 +1,7 @@
 package no.tippeaften.resources;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.ws.rs.GET;
@@ -31,7 +33,6 @@ public class Status {
 	public Bet registerBet(@QueryParam("bet") Bet bet) {
 		return betHandler.register(bet);
 	}
-
 	
 	@GET
 	@Timed
@@ -39,7 +40,6 @@ public class Status {
 		return matchHandler.register(bet);
 	}
 
-	
 	@GET
 	@Timed
 	public Player registerPlayer(@QueryParam("bet") Player bet) {
@@ -52,6 +52,18 @@ public class Status {
 		return new Match(counter.incrementAndGet(), new Team(hosts), new Team(visitors));
 	}
 
+	@GET
+	@Timed
+	public List<Match> getOngoingMatches() {
+		return new ArrayList<Match>();
+	}
+
+	@GET
+	@Timed
+	public List<Bet> getOngoingBets() {
+		return new ArrayList<Bet>();
+	}
+	
     @GET
     @Timed
     public Match getMatch(@QueryParam("id") Optional<Long> id) {
